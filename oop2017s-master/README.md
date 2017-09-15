@@ -1,1 +1,0 @@
-The project contain program for the OOP course at NTUT taught by Y C Cheng.
