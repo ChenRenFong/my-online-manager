@@ -172,18 +172,19 @@ TEST (Sort, sortByIncreasingCompactness) {
 	shapes.push_back(&tri1);
 	shapes.push_back(&tri2);
 
-	double ans[6] = { ( (4*M_PI*tri2.area()) / (tri2.perimeter()*tri2.perimeter()) ),
-					  ( (4*M_PI*tri1.area()) / (tri1.perimeter()*tri1.perimeter()) ),
-					  ( (4*M_PI*rec1.area()) / (rec1.perimeter()*rec1.perimeter()) ),
-					  ( (4*M_PI*rec2.area()) / (rec2.perimeter()*rec2.perimeter()) ),
-					  ( (4*M_PI*cir1.area()) / (cir1.perimeter()*cir1.perimeter()) ),
-					  ( (4*M_PI*cir2.area()) / (cir2.perimeter()*cir2.perimeter()) )};
+	double ans[6] = { ( (tri1.area()) / (tri1.perimeter()) ),
+					  ( (rec1.area()) / (rec1.perimeter()) ),
+					  ( (cir1.area()) / (cir1.perimeter()) ),
+					  ( (tri2.area()) / (tri2.perimeter()) ),
+					  ( (cir2.area()) / (cir2.perimeter()) ),
+					  ( (rec2.area()) / (rec2.perimeter()) )};
+					  
 	std::vector<double> youAns;
 	
 	Sort::sortByIncreasingCompactness(&shapes);
 	
 	for(Shape *oneShape : shapes ) {
-		youAns.push_back(((4*M_PI*oneShape->area())/(oneShape->perimeter()*oneShape->perimeter())));		
+		youAns.push_back(((oneShape->area())/(oneShape->perimeter())));		
 	}
 	
 	for(int i = 0 ; i <= 6 ;i++ ) {
