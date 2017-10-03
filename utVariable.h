@@ -1,10 +1,13 @@
 #ifndef UTVARIABLE_H
 #define UTVARIABLE_H
+
+#include "Number.h"
+#include "atom.h"
 #include "variable.h"
 
 TEST(Variable, constructor){
   Variable X("X");
-  ASSERT_EQ("X", X._symbol);
+  ASSERT_EQ("X", X.symbol());
 
 }
 

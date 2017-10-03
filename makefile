@@ -10,10 +10,10 @@ utAtom: mainAtom.o
 mainAtom.o: mainAtom.cpp utAtom.h atom.h
 	g++ -std=c++11 -c mainAtom.cpp
 
-#utVariable: mainVariable.o
-#		g++ -o utVariable mainVariable.o -lgtest -lpthread
-#mainVariable.o: mainVariable.cpp utVariable.h variable.h
-#		g++ -std=c++11 -c mainVariable.cpp
+utVariable: mainVariable.o
+		g++ -o utVariable mainVariable.o -lgtest -lpthread
+mainVariable.o: mainVariable.cpp utVariable.h variable.h
+		g++ -std=c++11 -c mainVariable.cpp
 		
 hw2: mainTerm.o
 		g++ -o hw2 mainTerm.o -lgtest -lpthread
