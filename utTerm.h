@@ -39,7 +39,7 @@ TEST (Number, matchFailureDiffConstant) {
 //true.
 TEST (Number, matchSuccessToVar) {
   Number _25(25);
-  Variable X("X");
+  Var X("X");
   ASSERT_TRUE(_25.match(X));
   ASSERT_EQ("25", X.value());
 }
@@ -54,7 +54,7 @@ TEST (Atom, matchFailureDiffConstant) {
 // X = tom.
 TEST (Atom, matchSuccessToVar) {
   Atom tom("tom");
-  Variable X("X");
+  Var X("X");
   ASSERT_TRUE(tom.match(X));
   ASSERT_EQ("tom", X.value());
 }
@@ -62,7 +62,7 @@ TEST (Atom, matchSuccessToVar) {
 // X = tom.
 TEST (Atom, matchSuccessToVarInstantedToDiffConstant) {
   Atom tom("tom");
-  Variable X("X");
+  Var X("X");
   ASSERT_TRUE(X.match(tom));
   ASSERT_TRUE(tom.match(X));
   ASSERT_EQ("tom", X.value());
@@ -72,7 +72,7 @@ TEST (Atom, matchSuccessToVarInstantedToDiffConstant) {
 TEST (Atom, matchFailureToVarInstantedToDiffConstant) {
   Atom tom("tom");
   Atom jerry("jerry");
-  Variable X("X");
+  Var X("X");
   ASSERT_TRUE(X.match(jerry));
   ASSERT_FALSE(tom.match(X));
 }
@@ -80,7 +80,7 @@ TEST (Atom, matchFailureToVarInstantedToDiffConstant) {
 // X = 5.
 TEST (Var, matchSuccessToNumber) {
   Number _5(5);
-  Variable X("X");
+  Var X("X");
   ASSERT_TRUE(X.match(_5));
   ASSERT_EQ("5", X.value());
 }
@@ -89,7 +89,7 @@ TEST (Var, matchSuccessToNumber) {
 TEST (Var, matchFailureToTwoDiffNumbers) {
   Number _25(25);
   Number _100(100);
-  Variable X("X");
+  Var X("X");
   ASSERT_TRUE(X.match(_25));
   ASSERT_FALSE(X.match(_100));
 }
@@ -98,7 +98,7 @@ TEST (Var, matchFailureToTwoDiffNumbers) {
 TEST (Var, matchSuccessToAtomThenFailureToNumber) {
   Number _25(25);
   Atom tom("tom");
-  Variable X("X");
+  Var X("X");
   ASSERT_TRUE(X.match(tom));
   ASSERT_FALSE(X.match(_25));
 }
@@ -107,7 +107,7 @@ TEST (Var, matchSuccessToAtomThenFailureToNumber) {
 TEST (Var, matchSuccessToAtomThenFailureToNumber2) {
   Number _25(25);
   Atom tom("tom");
-  Variable X("X");
+  Var X("X");
   ASSERT_TRUE(tom.match(X));
   ASSERT_FALSE(_25.match(X));
 }
@@ -115,7 +115,7 @@ TEST (Var, matchSuccessToAtomThenFailureToNumber2) {
 //true.
 TEST(Var, reAssignTheSameAtom){
   Atom tom("tom");
-  Variable X("X");
+  Var X("X");
   ASSERT_TRUE(X.match(tom));
   ASSERT_TRUE(X.match(tom));
 }
