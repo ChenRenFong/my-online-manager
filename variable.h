@@ -6,9 +6,9 @@
 
 using std::string;
 
-class Var : public Term {
+class Variable : public Term {
 public:
-  Var (string s):Term(s) { setType("Variable"); setAssignable(); }
+  Variable (string s):Term(s) { setType("Variable"); setAssignable(); }
   
   bool match( Term &term ){
 	bool ret = assignable();

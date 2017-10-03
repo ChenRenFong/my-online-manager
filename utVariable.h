@@ -1,7 +1,7 @@
 #ifndef UTVARIABLE_H
 #define UTVARIABLE_H
 
-#include "Number.h"
+#include "number.h"
 #include "atom.h"
 #include "variable.h"
 
