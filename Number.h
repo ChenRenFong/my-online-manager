@@ -9,6 +9,7 @@ using std::string;
 class Number : public Term {
 public:
   Number (string s):Term(s) { setType("Number"); setValue(s); setNotAssignable(); }
+  Number (int sNumber):Term(sNumber) { setType("Number"); setNotAssignable(); }
   
   bool match( Term &term ){
 	if ( term.type() == _type || term.type() == "Atom" ) {

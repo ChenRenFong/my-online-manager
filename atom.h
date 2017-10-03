@@ -8,7 +8,7 @@ using std::string;
 
 class Atom : public Term {
 public:
-  Atom (string s):Term(s) { setType("Atom"); setValue(s); setNotAssignable(); }
+  Atom (string s):Term(s,s) { setType("Atom"); setNotAssignable(); }
   
   bool match( Term &term ){
 	if ( term.type() == _type || term.type() == "Number" ) {
