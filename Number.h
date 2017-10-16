@@ -1,34 +1,25 @@
 #ifndef NUMBER_H
 #define NUMBER_H
 
+#include <iostream>
 #include <string>
+#include <sstream>
 #include "term.h"
 
 using std::string;
+using std::stringstream;
 
 class Number : public Term {
 public:
-  Number (string s):Term(s) { setType("Number"); setValue(s); setNotAssignable(); }
-  Number (int sNumber):Term(sNumber) { setType("Number"); setNotAssignable(); }
+  Number(double value) {stringstream ss; ss<<value; ss>>_symbol; _value=_symbol;}
   
-  bool match( Term &term ){
-	if ( term.type() == _type || term.type() == "Atom" ) {
-	  if (_symbol == term.symbol()) {return true;}
-      else {return false;}
-	}
-	else {
-	  bool ret = term.assignable();
-      if (term.assignable() == true) {
-        term.setValue(_symbol);
-        term.setNotAssignable();
-      }
-	  else {
-        if (_value == term.value()) {return true;}
-        else {return false;}
-	  }
-      return ret;
-	}
-  }
+  string type() const{ return _type; }
+  string symbol() const{ return _symbol; };
+  string symbol() { return _value; };
+  
+  string _type="Number";
+  string _symbol;
+  string _value;
 };
 
 #endif
