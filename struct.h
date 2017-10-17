@@ -5,7 +5,6 @@
 #include <vector>
 #include <string>
 #include "term.h"
-#include "struct.h"
 
 using std::string;
 using std::vector;
