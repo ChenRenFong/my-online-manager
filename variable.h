@@ -5,7 +5,10 @@
 #include <vector>
 #include <string>
 #include "term.h"
+#include "atom.h"
+#include "number.h"
 #include "struct.h"
+#include "variable.h"
 
 using std::string;
 using std::vector;
