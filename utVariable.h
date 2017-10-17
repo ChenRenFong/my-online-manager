@@ -6,7 +6,6 @@
 #include "struct.h"
 #include "variable.h"
 
-
 TEST(Variable, constructor){
   Variable X("X");
   ASSERT_EQ("X", X.symbol());
