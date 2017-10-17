@@ -20,7 +20,7 @@ public:
   string type() const{ return _type; }
   string symbol() const{ return _symbol; }
   string value() {
-    if(_value!=NULL) {
+    if(_value!=&_symbol) {
 	  
 	  if(_struct!=NULL) {
 		// recheck value
@@ -28,7 +28,7 @@ public:
 	    *str = _struct->value();
 	    _value = str;
 	  }
-	  
+
 	  return *_value;
 	}
     else {return _symbol;}	
@@ -132,7 +132,7 @@ public:
 	
   string _type = "Variable";
   string _symbol;
-  string * _value = NULL;
+  string * _value = &_symbol;
   bool _assignable = true;
   vector<Variable *> _connect;
   Struct * _struct = NULL;
