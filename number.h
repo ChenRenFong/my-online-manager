@@ -17,6 +17,25 @@ public:
   string symbol() const{ return _symbol; };
   string value() const{ return _value; };
   
+  bool match( Term &term ){
+	if ( term.type() == _type || term.type() == "Atom" || term.type() == "Struct" ) {
+	  if (_symbol == term.symbol()) {return true;}
+      else {return false;}
+	}
+	else {
+	  bool ret = term.assignable();
+      if (term.assignable() == true) {
+        term.setValue(_symbol);
+        term.setNotAssignable();
+      }
+	  else {
+        if (_symbol == term.value()) {return true;}
+        else {return false;}
+	  }
+      return ret;
+	}
+  }
+  
   string _type = "Number";
   string _symbol;
   string _value;

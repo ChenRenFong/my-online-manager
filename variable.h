@@ -125,6 +125,10 @@ public:
 
 	return ret;
   }
+  
+  bool assignable() { return _assignable; }
+  void setNotAssignable() { _assignable=false; }
+  void setValue(string &s) {_value=&s;}
 	
   string _type = "Variable";
   string _symbol;

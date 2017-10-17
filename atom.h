@@ -15,7 +15,7 @@ public:
   string value() const{ return symbol(); }
   
   bool match( Term &term ){
-	if ( term.type() == _type || term.type() == "Number" ) {
+	if ( term.type() == _type || term.type() == "Number" || term.type() == "Struct" ) {
 	  if (_symbol == term.symbol()) {return true;}
       else {return false;}
 	}
@@ -26,7 +26,7 @@ public:
         term.setNotAssignable();
       }
 	  else {
-        if (_value == term.value()) {return true;}
+        if (_symbol == term.value()) {return true;}
         else {return false;}
 	  }
       return ret;
