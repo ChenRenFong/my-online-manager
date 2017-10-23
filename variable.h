@@ -28,6 +28,12 @@ public:
 	    *str = _struct->value();
 	    _value = str;
 	  }
+	  else if(_list!=NULL) {
+		// recheck value
+	    string * str = new string();
+	    *str = _list->value();
+	    _value = str;
+	  }
 
 	  return *_value;
 	}
