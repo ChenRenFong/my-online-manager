@@ -224,7 +224,7 @@ TEST(List, headAndTailMatching4) {
 // Then it should throw a string: "Accessing head in an empty list" as an exception.
 TEST (List, emptyExecptionOfHead) {
   try { List list; list.head()->value(); }
-  catch(const char * e1) { EXPECT_EQ(string("Accessing head in an empty list"), e1); }
+  catch(string e1) { EXPECT_EQ(string("Accessing head in an empty list"), e1); }
 }
 
 // Given there is a empty list
@@ -232,7 +232,7 @@ TEST (List, emptyExecptionOfHead) {
 // Then it should throw a string: "Accessing tail in an empty list" as an exception.
 TEST (List, emptyExecptionOfTail) {
   try { List list; list.tail()->value(); }
-  catch(const char * e1) { EXPECT_EQ(string("Accessing tail in an empty list"), e1); }
+  catch(string e1) { EXPECT_EQ(string("Accessing tail in an empty list"), e1); }
 }
 
 #endif

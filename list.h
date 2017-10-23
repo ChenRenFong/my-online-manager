@@ -13,12 +13,12 @@ public:
   List (vector<Term *> const & elements):_elements(elements){}
   
   Term * head() const{ 
-    if(_elements.size()==0) { throw "Accessing head in an empty list"; }
+    if(_elements.size()==0) { throw string("Accessing head in an empty list"); }
 	return _elements[0]; 
   }
   
   List * tail() const{
-	if(_elements.size()==0) { throw "Accessing tail in an empty list"; }
+	if(_elements.size()==0) { throw string("Accessing tail in an empty list"); }
 	  
 	List * listPtr = new List();
 	
