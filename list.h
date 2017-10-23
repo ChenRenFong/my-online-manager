@@ -72,8 +72,8 @@ public:
 	else if(term.type()=="Variable") {
 	  bool ret = term.assignable();
       if (term.assignable() == true) {
-		string str = value();
-        term.setValue(str);
+		_value = value();
+        term.setValue(_value);
         term.setNotAssignable();
       }
 	  else {
@@ -89,6 +89,7 @@ public:
 
   string _type = "List";
   vector<Term *> _elements;
+  string _value;
 };
 
 #endif
