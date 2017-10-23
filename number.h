@@ -27,6 +27,7 @@ public:
       if (term.assignable() == true) {
         term.setValue(_symbol);
         term.setNotAssignable();
+		term.setConnecter();
       }
 	  else {
         if (_symbol == term.value()) {return true;}

@@ -16,6 +16,7 @@ public:
   virtual void setNotAssignable() {}
   virtual void setValue(string &s) {}
   virtual bool match(Term & term) { return symbol() == term.symbol(); }
+  virtual void setConnecter() {}
 };
 
 #endif

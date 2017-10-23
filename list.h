@@ -75,6 +75,7 @@ public:
 		_value = value();
         term.setValue(_value);
         term.setNotAssignable();
+		term.setConnecter();
       }
 	  else {
         if (value() == term.value()) {return true;}

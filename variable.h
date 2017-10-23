@@ -162,6 +162,12 @@ public:
 	return ret;
   }
   
+  void setConnecter() {
+	for(int i=0; i<_connect.size(); i++) {
+	  _connect[i]->_value = _value;
+	}
+  }
+  
   bool assignable() { return _assignable; }
   void setNotAssignable() { _assignable=false; }
   void setValue(string &s) {_value=&s;}
