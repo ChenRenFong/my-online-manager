@@ -131,14 +131,14 @@ public:
 	else if(term.type()=="List") {
 	  List * tempPtr = dynamic_cast<List *>(&term);
 	  _list = tempPtr;
-	  
+	  /*
 	  for(int i=0 ; i<tempPtr->_elements.size() ;i++) {
 		if(_symbol == tempPtr->_elements[i]->symbol()) {
 		  _list = NULL;
 		  return false;
 		}
 	  }
-	  
+	  */
 	  if(_assignable) {
 		// point to target
 		string * str = new string();
