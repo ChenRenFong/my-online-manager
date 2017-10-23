@@ -69,6 +69,19 @@ public:
 	  }
 	  return true;
 	}
+	else if(term.type()=="Variable") {
+	  bool ret = term.assignable();
+      if (term.assignable() == true) {
+		string str = value();
+        term.setValue(str);
+        term.setNotAssignable();
+      }
+	  else {
+        if (value() == term.value()) {return true;}
+        else {return false;}
+	  }
+      return ret;
+	}
 	else {
 	  return symbol() == term.symbol();
 	}
