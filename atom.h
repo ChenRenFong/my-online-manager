@@ -15,7 +15,7 @@ public:
   string value() const{ return symbol(); }
   
   bool match( Term &term ){
-	if ( term.type() == _type || term.type() == "Number" || term.type() == "Struct" ) {
+	if ( term.type() == _type || term.type() == "Number" || term.type() == "Struct" || term.type() == "List" ) {
 	  if (_symbol == term.symbol()) {return true;}
       else {return false;}
 	}

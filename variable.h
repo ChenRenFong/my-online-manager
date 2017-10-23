@@ -8,7 +8,7 @@
 #include "atom.h"
 #include "number.h"
 #include "struct.h"
-#include "variable.h"
+#include "list.h"
 
 using std::string;
 using std::vector;
@@ -122,6 +122,36 @@ public:
         // else {return false;}
 	  }
 	}
+	else if(term.type()=="List") {
+	  List * tempPtr = dynamic_cast<List *>(&term);
+	  _list = tempPtr;
+	  
+	  for(int i=0 ; i<tempPtr->_elements.size() ;i++) {
+		if(_symbol == tempPtr->_elements[i]->symbol()) {
+		  _list = NULL;
+		  return false;
+		}
+	  }
+	  
+	  if(_assignable) {
+		// point to target
+		string * str = new string();
+		*str = tempPtr->symbol();
+		_value = str;
+		// Atom * temp = &tempPtr->_name;
+	    // _value = &temp->_symbol;
+	    _assignable = false;
+		
+		// my connector point to my point's target 
+		for(int i=0; i<_connect.size(); i++) {
+		  _connect[i]->_value = _value;
+	    }
+	  }
+	  else {
+        // if (_value == &tempPtr->_symbol) {return true;}
+        // else {return false;}
+	  }
+	}
 
 	return ret;
   }
@@ -136,6 +166,7 @@ public:
   bool _assignable = true;
   vector<Variable *> _connect;
   Struct * _struct = NULL;
+  List * _list = NULL;
 };
 
 #endif

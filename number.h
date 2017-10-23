@@ -18,7 +18,7 @@ public:
   string value() const{ return _value; };
   
   bool match( Term &term ){
-	if ( term.type() == _type || term.type() == "Atom" || term.type() == "Struct" ) {
+	if ( term.type() == _type || term.type() == "Atom" || term.type() == "Struct" || term.type() == "List" ) {
 	  if (_symbol == term.symbol()) {return true;}
       else {return false;}
 	}
