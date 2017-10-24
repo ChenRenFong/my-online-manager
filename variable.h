@@ -168,6 +168,8 @@ public:
 	}
   }
   
+  bool matchWithVariable(Term & term) { return match(term); }
+  
   bool assignable() { return _assignable; }
   void setNotAssignable() { _assignable=false; }
   void setValue(string &s) {_value=&s;}

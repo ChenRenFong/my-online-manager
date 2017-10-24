@@ -23,6 +23,10 @@ public:
       else {return false;}
 	}
 	else {
+		
+	  return term.matchWithVariable(*this);
+	  
+	  /*
 	  bool ret = term.assignable();
       if (term.assignable() == true) {
         term.setValue(_symbol);
@@ -34,6 +38,7 @@ public:
         else {return false;}
 	  }
       return ret;
+	  */
 	}
   }
   

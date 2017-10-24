@@ -70,6 +70,10 @@ public:
 	  return true;
 	}
 	else if(term.type()=="Variable") {
+		
+	  return term.matchWithVariable(*this);
+	
+	  /*
 	  bool ret = term.assignable();
       if (term.assignable() == true) {
 		_value = value();
@@ -82,6 +86,7 @@ public:
         else {return false;}
 	  }
       return ret;
+	  */
 	}
 	else {
 	  return symbol() == term.symbol();
