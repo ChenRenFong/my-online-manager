@@ -71,7 +71,7 @@ public:
 	}
 	else if(term.type()=="Variable") {
 		
-	  // return term.matchWithVariable(*this);
+	  return term.matchWithVariable(*this);
 	
 	  /*
 	  bool ret = term.assignable();
