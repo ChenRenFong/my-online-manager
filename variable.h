@@ -154,11 +154,8 @@ public:
 	    }
 	  }
 	  else {
-		return false;
-		/*
-        if (_value == &tempPtr->symbol()) {return true;}
+        if (*_value == tempPtr->symbol()) {return true;}
         else {return false;}
-		*/
 	  }
 	}
 
