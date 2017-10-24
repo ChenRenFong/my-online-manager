@@ -135,7 +135,7 @@ public:
 	  for(int i=0 ; i<tempPtr->_elements.size() ;i++) {
 		if(_symbol == tempPtr->_elements[i]->symbol()) {
 		  _list = NULL;
-		  return true;
+		  return false;
 		}
 	  }
 	  
@@ -154,8 +154,11 @@ public:
 	    }
 	  }
 	  else {
-        // if (_value == &tempPtr->_symbol) {return true;}
-        // else {return false;}
+		return false;
+		/*
+        if (_value == &tempPtr->symbol()) {return true;}
+        else {return false;}
+		*/
 	  }
 	}
 

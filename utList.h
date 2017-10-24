@@ -105,15 +105,14 @@ TEST(List, matchToVarShouldSucceed) {
 
 // ?- X = [496, X, terence_tao].
 // false.
-// true.
 TEST(List, matchToVarOccuredInListShouldFail) {
   Number num_496(496);
   Variable X("X");
   Atom terence_tao("terence_tao");
   vector<Term *> v = {&num_496, &X, &terence_tao};
   List list(v);
-  //EXPECT_FALSE(X.match(list));
-  EXPECT_TRUE(X.match(list));
+  EXPECT_FALSE(X.match(list));
+  //EXPECT_TRUE(X.match(list));
   //EXPECT_EQ("[496, X, terence_tao]", X.value());
 }
 
