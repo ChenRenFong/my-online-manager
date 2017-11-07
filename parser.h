@@ -79,6 +79,11 @@ public:
       // encounter ',' then mean get the term so mark this is args
 	  args.push_back(createTerm());
     }
+	
+	// exception case
+	if(_currentToken!=' ') {}
+	else if(_currentToken!=')') { throw string("unexpected token"); }
+	
     return args;
   }
 //=====get elements.===================================
