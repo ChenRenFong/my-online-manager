@@ -178,7 +178,9 @@ TEST_F(ParserTest, parseList) {
 // When parser parses all terms via scanner.
 // Then it should return a string: "unexpected token" as exception.
 TEST_F(ParserTest, illegal1) {
-  try { Scanner scanner("[1,2)"); Parser parser(scanner); }
+  Scanner scanner("[1,2)"); 
+  Parser parser(scanner);
+  try { parser.createTerm(); }
   catch(string e1) { EXPECT_EQ(string("unexpected token"), e1); }
 }
 

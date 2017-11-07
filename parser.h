@@ -74,15 +74,14 @@ public:
     vector<Term*> args;
 	// get term successfully then mark this is args
     if(term) {args.push_back(term);}
-	// not get the term then redo get token until input over
+	// get token until input over
     while((_currentToken = _scanner.nextToken()) == ',') {
-      // encounter ',' then mean get the term so mark this is args
+      // encounter ',' then mean need to get now token
 	  args.push_back(createTerm());
     }
-	
+
 	// exception case
-	if(_currentToken!=' ') {}
-	else if(_currentToken!=')') { throw string("unexpected token"); }
+	if(_currentToken==']') { throw string("unexpected token"); }
 	
     return args;
   }
@@ -93,15 +92,14 @@ public:
     vector<Term*> elements;
 	// get term successfully then mark this is elements
     if(term) {elements.push_back(term);}
-	// not get the term then redo get token until input over
+	// get token until input over
     while((_currentToken = _scanner.nextToken()) == ',') {
-	  // encounter ',' then mean get the term so mark this is elements
+	  // encounter ',' then mean need to get now token
 	  elements.push_back(createTerm());
     }
 	
 	// exception case
-	if(_currentToken!=' ') {}
-	else if(_currentToken!=']') { throw string("unexpected token"); }
+	if(_currentToken==')') { throw string("unexpected token"); }
 	
 	return elements;
   }
