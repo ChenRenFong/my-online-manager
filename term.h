@@ -9,15 +9,17 @@ using std::vector;
 
 class Term {
 public:
+//=====basic.===================================
   virtual string type() const= 0;
   virtual string symbol() const= 0;
   virtual string value() { return symbol(); }
-  virtual bool assignable() { return false; }
-  virtual void setNotAssignable() {}
-  virtual void setValue(string &s) {}
+//=====match.===================================
   virtual bool match(Term & term) { return symbol() == term.symbol(); }
   virtual bool matchWithVariable(Term & term) {}
-  virtual void setConnecter() {}
+//=====size.===================================
+  virtual int arity() {}
+//=====args.===================================
+  virtual Term * args(int i) {}
 };
 
 #endif

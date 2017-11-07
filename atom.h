@@ -9,36 +9,19 @@ using std::string;
 class Atom : public Term{
 public:
   Atom(string s):_symbol(s) {}
-
+//=====basic.===================================
   string type() const{ return _type; }
   string symbol() const{ return _symbol; }
   string value() const{ return symbol(); }
-  
+//=====match.===================================
   bool match( Term &term ){
-	if ( term.type() == _type || term.type() == "Number" || term.type() == "Struct" || term.type() == "List" ) {
+	if ( term.type() == "Variable" ) { return term.matchWithVariable(*this); }
+	else {
 	  if (_symbol == term.symbol()) {return true;}
       else {return false;}
 	}
-	else {
-		
-	  return term.matchWithVariable(*this);
-	  
-	  /*
-	  bool ret = term.assignable();
-      if (term.assignable() == true) {
-        term.setValue(_symbol);
-        term.setNotAssignable();
-		term.setConnecter();
-      }
-	  else {
-        if (_symbol == term.value()) {return true;}
-        else {return false;}
-	  }
-      return ret;
-	  */
-	}
   }
-
+//=====parameter.===================================
   string _type = "Atom";
   string _symbol;
 };
