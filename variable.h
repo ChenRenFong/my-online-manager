@@ -55,7 +55,7 @@ public:
         else {return false;}
 	  }
 	}
-	else if(term.type()=="Number") {
+	else if(term.type()=="Number") {		
 	  Number * tempPtr = dynamic_cast<Number *>(&term);
 	  if(_assignable) {
 		// point to target
@@ -69,7 +69,7 @@ public:
         else {return false;}
 	  }
 	}
-	else if(term.type()=="Variable") {
+	else if(term.type()=="Variable") {		
 	  Variable * tempPtr = dynamic_cast<Variable *>(&term);
 	  vector<Variable *> myConnect = _connect;
 	  vector<Variable *> youConnect = tempPtr->_connect;
@@ -81,9 +81,11 @@ public:
 	  _connect.push_back(tempPtr);
 	  tempPtr->_connect.push_back(this);
 	  // set same target
-	  _value = tempPtr->_value;
+	  tempPtr->_value = _value;
 	  // set my connector point to same target
 	  for(int i=0; i<_connect.size(); i++) { _connect[i]->_value = tempPtr->_value; }
+	  
+	  return true;
 	}
 	else if(term.type()=="Struct") {
 	  Struct * tempPtr = dynamic_cast<Struct *>(&term);
