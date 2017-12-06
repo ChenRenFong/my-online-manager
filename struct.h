@@ -56,6 +56,10 @@ public:
   }
 //=====size.===================================
   int arity() { return _args.size(); }
+//=====createIterator.===================================
+  Iterator<Term*> * createIterator();
+  Iterator<Term*> * createBFSIterator();
+  Iterator<Term*> * createDFSIterator();
 //=====parameter.===================================
   string _type = "Struct";
   Atom _name;

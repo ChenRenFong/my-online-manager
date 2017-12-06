@@ -7,6 +7,9 @@
 using std::string;
 using std::vector;
 
+template<class T>
+class Iterator;
+
 class Term {
 public:
 //=====basic.===================================
@@ -18,6 +21,8 @@ public:
   virtual bool matchWithVariable(Term & term) {}
 //=====size.===================================
   virtual int arity() {}
+//=====createIterator.===================================
+  virtual Iterator<Term*> * createIterator();
 //=====args.===================================
   virtual Term * args(int i) {}
 };

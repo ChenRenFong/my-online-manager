@@ -10,6 +10,10 @@ class List : public Term {
 public:
   List (): _elements() {}
   List (vector<Term *> const & elements):_elements(elements){}
+//=====args.===================================
+  Term * args(int i) { return _elements[i]; }
+//=====size.===================================
+  int arity() { return _elements.size(); }
 //=====myself basic.===================================
   Term * head() const{ 
     if(_elements.size()==0) { throw string("Accessing head in an empty list"); }
@@ -58,6 +62,10 @@ public:
 	else if(term.type()=="Variable") { return term.matchWithVariable(*this); }
 	else { return symbol() == term.symbol(); }
   }
+//=====createIterator.===================================
+  Iterator<Term*> * createIterator();
+  Iterator<Term*> * createBFSIterator();
+  Iterator<Term*> * createDFSIterator();
 //=====parameter.===================================
   string _type = "List";
   vector<Term *> _elements;
