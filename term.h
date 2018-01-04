@@ -14,7 +14,7 @@ class Term {
 public:
 //=====basic.===================================
   virtual string type() const= 0;
-  virtual string symbol() const= 0;
+  virtual string symbol() const { return _symbol; }
   virtual string value() { return symbol(); }
 //=====match.===================================
   virtual bool match(Term & term) { return symbol() == term.symbol(); }
@@ -25,6 +25,8 @@ public:
   virtual Iterator<Term*> * createIterator();
 //=====args.===================================
   virtual Term * args(int i) {}
+//=====parameter.===================================
+  string _symbol;
 };
 
 #endif

@@ -1,13 +1,22 @@
-all: hw7
+all: hw8 shell
 
-hw7: mainTest.o term.o struct.o list.o
+hw8: mainTest.o term.o struct.o list.o
 ifeq (${OS}, Windows_NT)
-	g++ -o hw7 mainTest.o term.o struct.o list.o -lgtest
+	g++ -o hw8 mainTest.o term.o struct.o list.o -lgtest
 else
-	g++ -o hw7 mainTest.o term.o struct.o list.o -lgtest -lpthread
+	g++ -o hw8 mainTest.o term.o struct.o list.o -lgtest -lpthread
 endif
-	
-mainTest.o: utIterator.h atom.h number.h variable.h scanner.h parser.h node.h iterator.h
+
+shell: shell.o term.o struct.o list.o
+ifeq (${OS}, Windows_NT)
+	g++ -o shell shell.o term.o struct.o list.o -lgtest
+else
+	g++ -o shell shell.o term.o struct.o list.o -lgtest -lpthread
+endif
+
+shell.o: shell.cpp atom.h number.h variable.h scanner.h parser.h node.h exp.h iterator.h
+	g++ -std=gnu++0x -c shell.cpp 	
+mainTest.o: exception.h expression.h atom.h number.h variable.h scanner.h parser.h node.h exp.h iterator.h
 	g++ -std=gnu++0x -c mainTest.cpp 
 term.o: term.h
 	g++ -std=gnu++0x -c term.cpp 
@@ -22,5 +31,5 @@ clean:
 ifeq (${OS}, Windows_NT)
 	del *.o *.exe
 else
-	rm -f *.o hw7
+	rm -f *.o hw8
 endif

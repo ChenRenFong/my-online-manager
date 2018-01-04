@@ -81,7 +81,8 @@ public:
 	  _connect.push_back(tempPtr);
 	  tempPtr->_connect.push_back(this);
 	  // set same target
-	  tempPtr->_value = _value;
+	  if(!tempPtr->_assignable) { _value = tempPtr->_value; }
+	  else { tempPtr->_value = _value; }
 	  // set my connector point to same target
 	  for(int i=0; i<_connect.size(); i++) { _connect[i]->_value = tempPtr->_value; }
 	  

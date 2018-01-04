@@ -2,7 +2,9 @@
 #define PARSER_H
 #include <string>
 #include <vector>
+#include <stack>
 using std::string;
+using std::stack;
 
 #include "atom.h"
 #include "variable.h"
@@ -11,6 +13,7 @@ using std::string;
 #include "struct.h"
 #include "list.h"
 #include "node.h"
+#include "exp.h"
 
 //#include "utParser.h"
 
@@ -38,7 +41,7 @@ public:
 	  
     }else if(token == ATOM || token == ATOMSC){
 		
-      Atom* atom = new Atom(symtable[_scanner.tokenValue()].first);
+      Atom* atom = new Atom(symtable[_scanner.tokenValue()].first);	  
       if(_scanner.currentChar() == '(' ) {
 		Term* tempTerm = structure();
         return tempTerm;
@@ -87,7 +90,8 @@ public:
 	  _tree.push_back(node3); 
 
       return tempTerm;
-    } else {
+    }
+	else {	
       throw string("unexpected token");
     }
   }
@@ -118,7 +122,8 @@ public:
 	  _tree.push_back(node3); 
 	  
       return tempTerm;
-    } else {
+    }
+	else {
       throw string("unexpected token");
     }
   }
@@ -136,12 +141,89 @@ public:
   Node * expressionTree() {
     return _root;
   }
-//=====private.===================================
-private:
-  FRIEND_TEST(ParserTest, createArgs);
-  FRIEND_TEST(ParserTest,ListOfTermsEmpty);
-  FRIEND_TEST(ParserTest,listofTermsTwoNumber);
-  FRIEND_TEST(ParserTest, createTerm_nestedStruct3);
+//=====buildExpression.===================================
+  void buildExpression(){
+    disjunctionMatch();
+    restDisjunctionMatch();
+    if (createTerm() != nullptr || _currentToken != '.') {
+	  throw string("Missing token '.'");
+	}
+  }
+//=====restDisjunctionMatch.===================================  
+  void restDisjunctionMatch() {	  
+    if (_scanner.currentChar() == ';') {
+      createTerm();
+	  
+	  if(_scanner.currentChar() == '.') {
+		throw string("Unexpected ';' before '.'");  
+	  }
+	  
+      disjunctionMatch();
+      Exp *right = _expStack.top();
+      _expStack.pop();
+      Exp *left = _expStack.top();
+      _expStack.pop();
+      _expStack.push(new DisjExp(left, right));
+      restDisjunctionMatch();
+    }
+  }
+//=====disjunctionMatch.===================================
+  void disjunctionMatch() {
+    conjunctionMatch();
+    restConjunctionMatch();
+  }
+//=====restConjunctionMatch.===================================
+  void restConjunctionMatch() {  
+    
+  
+    if (_scanner.currentChar() == ',') {
+      createTerm();
+	  
+	  if(_scanner.currentChar() == '.') {
+		throw string("Unexpected ',' before '.'");  
+	  }
+	  
+      conjunctionMatch();
+      Exp *right = _expStack.top();
+      _expStack.pop();
+      Exp *left = _expStack.top();
+      _expStack.pop();
+      _expStack.push(new ConjExp(left, right));
+      restConjunctionMatch();
+    }
+  }
+//=====conjunctionMatch.===================================
+  void conjunctionMatch() {
+	Term * left = createTerm();
+	if (createTerm() == nullptr && _currentToken == '=') {
+      Term * right = createTerm();
+      _expStack.push(new MatchExp(left, right));
+    }
+	else if(_currentToken == ';' && _scanner.currentChar() == '.') {
+	  throw string("Unexpected ';' before '.'");
+	}
+	else if(_currentToken == ',' && _scanner.currentChar() == '.') {
+	  throw string("Unexpected ',' before '.'");
+	}
+	else if(_currentToken == '.') {
+	  string msg = left->symbol() + " does never get assignment";
+	  throw string(msg);
+	}
+  }
+//=====getExpressionTree.===================================  
+  Exp* getExpressionTree(){
+    return _expStack.top();
+  }
+//=====getExpressionResult.=================================== 
+  string getExpressionResult(){
+    return _expStack.top()->getExpressionResult() + ".";
+  }
+//=====public.===================================
+public:
+  //FRIEND_TEST(ParserTest, createArgs);
+  //FRIEND_TEST(ParserTest,ListOfTermsEmpty);
+  //FRIEND_TEST(ParserTest,listofTermsTwoNumber);
+  //FRIEND_TEST(ParserTest, createTerm_nestedStruct3);
 //=====createTerms.===================================
   void createTerms() {
     Term* term = createTerm();
@@ -151,6 +233,13 @@ private:
 	  
       while((_currentToken = _scanner.nextToken()) == ',' || _currentToken == '=' || _currentToken == ';') {
 		int operatorNum = _currentToken;
+		
+		if(operatorNum==';' && _scanner.currentChar() == ')') {
+		  throw string("Unbalanced operator");
+		}
+		else if(operatorNum==';' && _scanner.currentChar() == ']') {
+		  throw string("Unbalanced operator");
+		}
 		
 		if(operatorNum==';') {
 		  Node * node2 = new Node(SEMICOLON, nullptr, nullptr, nullptr);
@@ -301,5 +390,6 @@ private:
   vector<Node *> _tree;
   Node * _root;
   vector<Term *> sameList;	 
+  stack<Exp*> _expStack;
 };
 #endif
