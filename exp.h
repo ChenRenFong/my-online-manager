@@ -70,6 +70,12 @@ public:
 		if(_left->checkIsVariableMatchItsalf()) {
 		  return _right->getExpressionResult();
 		}
+		MatchExp* pm = dynamic_cast<MatchExp*>(_right);
+		if(pm) {
+		  if(_right->checkIsVariableMatchItsalf()) {
+			return _left->getExpressionResult();
+		  }
+		}
       }
       return _left->getExpressionResult() + ", " + _right->getExpressionResult();
     }
